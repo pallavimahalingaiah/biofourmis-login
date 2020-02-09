@@ -6,6 +6,7 @@ import {
   Col,
   Form,
   Button,
+  InputGroup,
   Modal,
   Image
 } from "react-bootstrap";
@@ -81,20 +82,22 @@ const ForgotPasswordForm = () => {
               <Form noValidate onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>New Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter new password"
-                    name="password"
-                    onChange={handleChange}
-                    onKeyPress={handleBlur}
-                    value={values.password}
-                    className={
-                      values.password.length > 0 &&
-                      passwordValidation.length > 0
-                        ? "error"
-                        : null
-                    }
-                  />
+                  <InputGroup>
+                    <Form.Control
+                      type="password"
+                      placeholder="Enter new password"
+                      name="password"
+                      onChange={handleChange}
+                      onKeyPress={handleBlur}
+                      value={values.password}
+                      className={
+                        values.password.length > 0 &&
+                        passwordValidation.length > 0
+                          ? "error"
+                          : null
+                      }
+                    />
+                  </InputGroup>
                   {values.password.length > 0 &&
                   passwordValidation.length > 0 ? (
                     <div className="error-message">

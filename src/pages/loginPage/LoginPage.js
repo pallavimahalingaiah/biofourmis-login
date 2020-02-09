@@ -1,15 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Modal,
-  Image
-} from "react-bootstrap";
-import { Formik } from "formik";
-import * as Yup from "yup";
+import { Container, Row, Col, Button, Modal, Image } from "react-bootstrap";
 
 import "./LoginPage.css";
 import logo from "./images/logo-biofourmis.svg";
@@ -54,13 +44,13 @@ class LoginPage extends Component {
             <Container fluid>
               <Row>
                 {this.state.showForgotPassword ? (
-                  <Col xs>
+                  <Col xs style={{ textAlign: "center" }}>
                     <Button
                       active
                       variant="link"
                       className="loginpage-forgot-Password-tab-btn"
                     >
-                      Create new Password
+                      Create new password
                     </Button>
                   </Col>
                 ) : (
