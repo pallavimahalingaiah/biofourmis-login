@@ -114,12 +114,16 @@ const ForgotPasswordForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.confirmPassword}
-                    className={errors.confirmPassword ? "error" : null}
+                    className={
+                      values.confirmPassword !== "" &&
+                      !confirmPasswordValidation
+                        ? "error"
+                        : null
+                    }
                   />
-                  {errors.confirmPassword ? (
-                    <div className="error-message">
-                      {errors.confirmPassword}
-                    </div>
+                  {values.confirmPassword !== "" &&
+                  !confirmPasswordValidation ? (
+                    <div className="error-message">"password mismatch"</div>
                   ) : values.confirmPassword !== "" &&
                     values.password !== "" ? (
                     <div>password matched</div>

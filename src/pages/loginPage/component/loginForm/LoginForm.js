@@ -11,6 +11,8 @@ import {
 
 import { Formik } from "formik";
 import * as Yup from "yup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = () => {
   const validationSchema = Yup.object().shape({
@@ -82,6 +84,7 @@ const LoginForm = () => {
                       touched.password && errors.password ? "error" : null
                     }
                   />
+                  <FontAwesomeIcon icon={faEyeSlash}></FontAwesomeIcon>
                   {touched.password && errors.password ? (
                     <div className="error-message">{errors.password}</div>
                   ) : null}
