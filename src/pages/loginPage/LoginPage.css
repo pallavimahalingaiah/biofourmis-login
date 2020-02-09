@@ -9,4 +9,77 @@
     background-size: 100% 100%;
 } 
 
+.loginpage-container-wrapper {
+    position: relative;
+    top: 10%;
+    /* width: 28% !important; */
+    background-color: white;
+}
+
+.modal-40w {
+    width: 28% !important;
+    /* max-width: none !important; */
+}
+
+.loginpage-logo {
+    justify-content: center !important;
+    background-color: aliceblue;
+    border-bottom: none !important;
+}
+
+.loginpage-login-tab {
+    background-color: aliceblue;
+    padding-bottom: inherit !important;
+}
+
+.loginpage-login-tab-btn {
+    font-size: xx-large !important;
+    color: black !important;
+    text-decoration: none !important;
+    border-bottom-width: thick !important;
+    border-bottom: 3px  rgb(39, 142, 233) solid !important;
+}
+
+.loginpage-forgot-password {
+    align-self: center !important;
+}
+
+.loginpage-forgot-password Button {
+    font-weight: bold;
+}
+
+.error {
+    border: 2px solid #ff6565 !important;
+  }
+  
+  .error-message {
+    color: #ff6565;
+    padding: 0.5em 0.2em;
+    height: 1em;
+    position: absolute;
+    font-size: 0.8em;
+  }
+
+
+.loginpage-login-btn {
+    border-top: none !important;
+    justify-content: flex-start !important;
+    padding-bottom: 2rem !important;
+    padding-left: 2rem !important;
+}
+
+.loginpage-modal-body{
+    padding-top: 3rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.loginpage-textfield {
+    margin-bottom: 2rem !important;
+}
+
+
+.loginpage-input {
+    background-color: ghostwhite !important;
+}
+
 
