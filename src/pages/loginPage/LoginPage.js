@@ -15,25 +15,20 @@ import "./LoginPage.css";
 import logo from "./images/logo-biofourmis.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import LoginForm from "./component/loginForm";
+import ForgotPasswordForm from "./component/forgotPasswordForm";
 
 class LoginPage extends Component {
   state = {
     validated: false,
+    showForgotPassword: false,
     blockPassword: false,
     emailValue: ""
   };
 
-  validationSchema = () =>
-    Yup.object().shape({
-      email: Yup.string()
-        .email("*Must be a valid email address")
-        .max(100, "*Email must be less than 100 characters")
-        .required("*Email is required")
-      /* password: Yup.string()
-        .min(8, "*Password must have at least 8 characters")
-        .max(100, "*Password can't be longer than 100 characters")
-        .required("*Password is required") */
-    });
+  handleFogotPassword = () => {
+    this.setState({ showForgotPassword: true });
+  };
 
   render() {
     return (
@@ -43,7 +38,6 @@ class LoginPage extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           animation={false}
           backdrop={false}
-          //size="md"
           dialogClassName="modal-40w"
         >
           <Modal.Header className="loginpage-logo">
@@ -71,7 +65,7 @@ class LoginPage extends Component {
                 </Col>
 
                 <Col className="loginpage-forgot-password ">
-                  <Button active variant="link">
+                  <Button variant="link" onClick={this.handleFogotPassword}>
                     Forgot Password?
                   </Button>
                 </Col>
@@ -79,74 +73,11 @@ class LoginPage extends Component {
             </Container>
           </Modal.Header>
           <Modal.Body className="loginpage-modal-body">
-            <Container>
-              <Row className="show-grid">
-                <Col xs>
-                  <Formik
-                    validationSchema={this.validationSchema}
-                    onSubmit={console.log}
-                    initialValues={{
-                      email: "",
-                      password: ""
-                    }}
-                  >
-                    {({
-                      handleSubmit,
-                      handleChange,
-                      handleBlur,
-                      values,
-                      touched,
-                      isValid,
-                      errors
-                    }) => (
-                      <Form noValidate>
-                        <Form.Group controlId="formBasicEmail">
-                          <Form.Label>Email address</Form.Label>
-                          <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                            name="email"
-                            onChange={handleChange}
-                            onKeyPress={handleBlur}
-                            value={values.email}
-                            className={errors.email ? "error" : null}
-                          />
-                          {errors.email ? (
-                            <div className="error-message">{errors.email}</div>
-                          ) : null}
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                          <Form.Label>Password</Form.Label>
-                          <Form.Control
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.password}
-                            className={
-                              touched.password && errors.password
-                                ? "error"
-                                : null
-                            }
-                          />
-                          {touched.password && errors.password ? (
-                            <div className="error-message">
-                              {errors.password}
-                            </div>
-                          ) : null}
-                        </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                          Login
-                        </Button>
-                      </Form>
-                    )}
-                  </Formik>
-                </Col>
-              </Row>
-            </Container>
+            {this.state.showForgotPassword ? (
+              <ForgotPasswordForm />
+            ) : (
+              <LoginForm></LoginForm>
+            )}
           </Modal.Body>
           {/* <Modal.Footer className="loginpage-login-btn">
             <Button>Login</Button>
