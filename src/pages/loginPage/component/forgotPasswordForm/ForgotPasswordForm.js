@@ -12,26 +12,56 @@ import {
 
 import { Formik } from "formik";
 import * as Yup from "yup";
+import FormErrorValidation from "./../../../../components/error";
+import "./ForgotPasswordForm.css";
+
+let passwordValidation = [];
+let confirmPasswordValidation;
 
 const ForgotPasswordForm = () => {
-  const validationSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(8, "*Password must have at least 8 characters")
-      .max(100, "*Password can't be longer than 100 characters")
-      .required("*Password is required")
-  });
-
   const handleSubmit = (values, { resetForm, setSubmitting }) => {
-    console.log("values", values);
     resetForm();
     setSubmitting(false);
   };
+
+  const validateNewPassword = values => {
+    /* clear the global array as this function is called onChange*/
+    passwordValidation = [];
+
+    /* password field validations */
+    // length check
+    if (values.password.length < 8) {
+      passwordValidation.push(0);
+    }
+    // atleast one uppercase check
+    if (!/[A-Z]/.test(values.password)) {
+      passwordValidation.push(1);
+    }
+
+    // atleast one lowercase check
+    if (!/[a-z]/.test(values.password)) {
+      passwordValidation.push(2);
+    }
+
+    // atleast one numeric check
+    if (!/[0-9]/.test(values.password)) {
+      passwordValidation.push(3);
+    }
+
+    // Confirm password check
+    if (values.password === values.confirmPassword) {
+      confirmPasswordValidation = true;
+    } else {
+      confirmPasswordValidation = false;
+    }
+  };
+
   return (
     <Container>
       <Row className="show-grid">
         <Col xs>
           <Formik
-            validationSchema={validationSchema}
+            validate={validateNewPassword}
             onSubmit={handleSubmit}
             initialValues={{
               password: "",
@@ -58,10 +88,20 @@ const ForgotPasswordForm = () => {
                     onChange={handleChange}
                     onKeyPress={handleBlur}
                     value={values.password}
-                    className={errors.password ? "error" : null}
+                    className={
+                      values.password.length > 0 &&
+                      passwordValidation.length > 0
+                        ? "error"
+                        : null
+                    }
                   />
-                  {errors.password ? (
-                    <div className="error-message">{errors.password}</div>
+                  {values.password.length > 0 &&
+                  passwordValidation.length > 0 ? (
+                    <div className="error-message">
+                      <FormErrorValidation
+                        passwordValidation={passwordValidation}
+                      ></FormErrorValidation>
+                    </div>
                   ) : null}
                 </Form.Group>
 
@@ -74,27 +114,38 @@ const ForgotPasswordForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.confirmPassword}
-                    className={
-                      touched.confirmPassword && errors.confirmPassword
-                        ? "error"
-                        : null
-                    }
+                    className={errors.confirmPassword ? "error" : null}
                   />
-                  {touched.confirmPassword && errors.confirmPassword ? (
+                  {errors.confirmPassword ? (
                     <div className="error-message">
                       {errors.confirmPassword}
                     </div>
+                  ) : values.confirmPassword !== "" &&
+                    values.password !== "" ? (
+                    <div>password matched</div>
                   ) : null}
                 </Form.Group>
 
                 <Button
                   variant={
-                    !errors.email && !errors.password ? "primary" : "secondary"
+                    errors.password ||
+                    errors.confirmPassword ||
+                    values.password === "" ||
+                    values.confirmPassword === ""
+                      ? "secondary"
+                      : "primary"
                   }
                   type="submit"
-                  disabled={errors.email || errors.password ? true : false}
+                  disabled={
+                    errors.password ||
+                    errors.confirmPassword ||
+                    values.password === "" ||
+                    values.confirmPassword === ""
+                      ? true
+                      : false
+                  }
                 >
-                  Login
+                  Confirm
                 </Button>
               </Form>
             )}

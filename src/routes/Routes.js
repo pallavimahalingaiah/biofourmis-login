@@ -18,7 +18,7 @@ const Routes = () => {
             </React.Fragment>
           )}
         />
-        <Route exact path="/" component={Layout} />
+        <Route exact path="/" component={LoginPage} />
       </Switch>
     </Router>
   );

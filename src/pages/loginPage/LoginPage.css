@@ -40,6 +40,15 @@
     border-bottom: 3px  rgb(39, 142, 233) solid !important;
 }
 
+.loginpage-forgot-Password-tab-btn {
+    text-align: center !important;
+    font-size: x-large !important;
+    color: black !important;
+    text-decoration: none !important;
+    border-bottom-width: thick !important;
+    border-bottom: 3px  rgb(39, 142, 233) solid !important;
+}
+
 .loginpage-forgot-password {
     align-self: center !important;
 }
