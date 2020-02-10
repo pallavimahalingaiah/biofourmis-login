@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { Component } from "react";
 import {
   Container,
   Row,
@@ -12,20 +11,31 @@ import {
 } from "react-bootstrap";
 
 import { Formik } from "formik";
-import * as Yup from "yup";
 import FormErrorValidation from "./../../../../components/error";
 import "./ForgotPasswordForm.css";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEyeSlash,
+  faEye,
+  faTimesCircle
+} from "@fortawesome/free-solid-svg-icons";
 
 let passwordValidation = [];
 let confirmPasswordValidation;
 
-const ForgotPasswordForm = () => {
-  const handleSubmit = (values, { resetForm, setSubmitting }) => {
+class ForgotPasswordForm extends Component {
+  state = {
+    passwordHidden: true,
+    confirmPasswordHidden: true
+  };
+
+  handleSubmit = (values, { resetForm, setSubmitting }) => {
     resetForm();
     setSubmitting(false);
   };
 
-  const validateNewPassword = values => {
+  validateNewPassword = values => {
     /* clear the global array as this function is called onChange*/
     passwordValidation = [];
 
@@ -57,110 +67,184 @@ const ForgotPasswordForm = () => {
     }
   };
 
-  return (
-    <Container>
-      <Row className="show-grid">
-        <Col xs>
-          <Formik
-            validate={validateNewPassword}
-            onSubmit={handleSubmit}
-            initialValues={{
-              password: "",
-              confirmPassword: ""
-            }}
-          >
-            {({
-              handleSubmit,
-              isSubmitting,
-              handleChange,
-              handleBlur,
-              values,
-              touched,
-              isValid,
-              errors
-            }) => (
-              <Form noValidate onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>New Password</Form.Label>
-                  <InputGroup>
-                    <Form.Control
-                      type="password"
-                      placeholder="Enter new password"
-                      name="password"
-                      onChange={handleChange}
-                      onKeyPress={handleBlur}
-                      value={values.password}
-                      className={
-                        values.password.length > 0 &&
-                        passwordValidation.length > 0
-                          ? "error"
-                          : null
-                      }
-                    />
-                  </InputGroup>
-                  {values.password.length > 0 &&
-                  passwordValidation.length > 0 ? (
-                    <div className="error-message">
-                      <FormErrorValidation
-                        passwordValidation={passwordValidation}
-                      ></FormErrorValidation>
-                    </div>
-                  ) : null}
-                </Form.Group>
+  handleShowPassword = () => {
+    this.setState({ passwordHidden: !this.state.passwordHidden });
+  };
 
-                <Form.Group controlId="formBasicPassword">
-                  <Form.Label>Confirm new password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="confirm new password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.confirmPassword}
-                    className={
-                      values.confirmPassword !== "" &&
-                      !confirmPasswordValidation
-                        ? "error"
-                        : null
+  handleShowConfirmPassword = () => {
+    this.setState({ confirmPasswordHidden: !this.state.confirmPasswordHidden });
+  };
+
+  render() {
+    return (
+      <Container>
+        <Row className="show-grid">
+          <Col xs>
+            <Formik
+              validate={this.validateNewPassword}
+              onSubmit={this.handleSubmit}
+              initialValues={{
+                password: "",
+                confirmPassword: ""
+              }}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                touched,
+                isValid,
+                errors,
+                setFieldValue
+              }) => (
+                <Form noValidate onSubmit={handleSubmit}>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>New Password</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        type={this.state.passwordHidden ? "password" : "text"}
+                        placeholder="Enter new password"
+                        name="password"
+                        onChange={handleChange}
+                        onKeyPress={handleBlur}
+                        value={values.password}
+                        className={
+                          values.password.length > 0 &&
+                          passwordValidation.length > 0
+                            ? "error"
+                            : null
+                        }
+                      />
+                      <InputGroup.Append>
+                        {!this.state.passwordHidden ? (
+                          <Button
+                            variant="outline-secondary"
+                            className="border border-left-0"
+                            /* setFieldValue is used to set particular fields in formik */
+                            onClick={() => {
+                              setFieldValue("password", "");
+                              this.setState({ passwordHidden: true });
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faTimesCircle}
+                            ></FontAwesomeIcon>
+                          </Button>
+                        ) : null}
+
+                        <Button
+                          variant="outline-secondary"
+                          className="border border-left-0"
+                          onClick={this.handleShowPassword}
+                        >
+                          <FontAwesomeIcon
+                            icon={
+                              this.state.passwordHidden ? faEyeSlash : faEye
+                            }
+                          ></FontAwesomeIcon>
+                        </Button>
+                      </InputGroup.Append>
+                    </InputGroup>
+                    {values.password.length > 0 &&
+                    passwordValidation.length > 0 ? (
+                      <div className="error-message">
+                        <FormErrorValidation
+                          passwordValidation={passwordValidation}
+                        ></FormErrorValidation>
+                      </div>
+                    ) : null}
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Confirm new password</Form.Label>
+                    <InputGroup>
+                      <Form.Control
+                        type={
+                          this.state.confirmPasswordHidden ? "password" : "text"
+                        }
+                        name="confirmPassword"
+                        placeholder="confirm new password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.confirmPassword}
+                        className={
+                          values.confirmPassword !== "" &&
+                          !confirmPasswordValidation
+                            ? "error"
+                            : null
+                        }
+                      />
+                      <InputGroup.Append>
+                        {!this.state.confirmPasswordHidden ? (
+                          <Button
+                            variant="outline-secondary"
+                            className="border border-left-0"
+                            /* setFieldValue is used to set particular fields in formik */
+                            onClick={() => {
+                              setFieldValue("confirmPassword", "");
+                              this.setState({ confirmPasswordHidden: true });
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faTimesCircle}
+                            ></FontAwesomeIcon>
+                          </Button>
+                        ) : null}
+
+                        <Button
+                          variant="outline-secondary"
+                          className="border border-left-0"
+                          onClick={this.handleShowConfirmPassword}
+                        >
+                          <FontAwesomeIcon
+                            icon={
+                              this.state.confirmPasswordHidden
+                                ? faEyeSlash
+                                : faEye
+                            }
+                          ></FontAwesomeIcon>
+                        </Button>
+                      </InputGroup.Append>
+                    </InputGroup>
+                    {values.confirmPassword !== "" &&
+                    !confirmPasswordValidation ? (
+                      <div className="error-message">"password mismatch"</div>
+                    ) : values.confirmPassword !== "" &&
+                      values.password !== "" ? (
+                      <div>password matched</div>
+                    ) : null}
+                  </Form.Group>
+
+                  <Button
+                    variant={
+                      errors.password ||
+                      errors.confirmPassword ||
+                      values.password === "" ||
+                      values.confirmPassword === ""
+                        ? "secondary"
+                        : "primary"
                     }
-                  />
-                  {values.confirmPassword !== "" &&
-                  !confirmPasswordValidation ? (
-                    <div className="error-message">"password mismatch"</div>
-                  ) : values.confirmPassword !== "" &&
-                    values.password !== "" ? (
-                    <div>password matched</div>
-                  ) : null}
-                </Form.Group>
-
-                <Button
-                  variant={
-                    errors.password ||
-                    errors.confirmPassword ||
-                    values.password === "" ||
-                    values.confirmPassword === ""
-                      ? "secondary"
-                      : "primary"
-                  }
-                  type="submit"
-                  disabled={
-                    errors.password ||
-                    errors.confirmPassword ||
-                    values.password === "" ||
-                    values.confirmPassword === ""
-                      ? true
-                      : false
-                  }
-                >
-                  Confirm
-                </Button>
-              </Form>
-            )}
-          </Formik>
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+                    type="submit"
+                    disabled={
+                      errors.password ||
+                      errors.confirmPassword ||
+                      values.password === "" ||
+                      values.confirmPassword === ""
+                        ? true
+                        : false
+                    }
+                  >
+                    Confirm
+                  </Button>
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
+}
 
 export default ForgotPasswordForm;
