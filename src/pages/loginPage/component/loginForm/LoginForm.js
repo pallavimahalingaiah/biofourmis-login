@@ -134,12 +134,22 @@ class LoginForm extends Component {
 
                   <Button
                     variant={
-                      !errors.email && !errors.password
-                        ? "primary"
-                        : "secondary"
+                      errors.email ||
+                      errors.password ||
+                      values.email === "" ||
+                      values.password === ""
+                        ? "secondary"
+                        : "primary"
                     }
                     type="submit"
-                    disabled={errors.email || errors.password ? true : false}
+                    disabled={
+                      errors.email ||
+                      errors.password ||
+                      values.email === "" ||
+                      values.password === ""
+                        ? true
+                        : false
+                    }
                   >
                     Login
                   </Button>
