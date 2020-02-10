@@ -6,8 +6,7 @@ import {
   Form,
   Button,
   InputGroup,
-  Alert,
-  Image
+  Alert
 } from "react-bootstrap";
 
 import { Formik } from "formik";

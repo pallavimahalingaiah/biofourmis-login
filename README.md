@@ -7,10 +7,13 @@ To run the project:
 - run "npm install"
 - run "npm start" or "yarn start"
 
+## Design Document
+
+Refer docs folder for the design document.
 
 ## General rules
 
-#### Casing
+### Casing
 
 Folders in lower case are considered part of the structure.
 

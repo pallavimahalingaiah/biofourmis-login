@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  Button,
-  Modal,
-  Image,
-  InputGroup
-} from "react-bootstrap";
+import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
