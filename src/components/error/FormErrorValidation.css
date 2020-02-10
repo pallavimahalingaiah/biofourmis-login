@@ -1,0 +1,29 @@
+.form-error-validation {
+    background-color:#545591;
+    color:white;
+    border-radius: .3rem ;
+}
+
+.form-error-validation-alert {
+    border: none !important;
+    margin-bottom: 0px !important;
+border-radius: 0px !important;
+padding:.5rem !important
+}
+
+.cancelIcon {
+    vertical-align: middle;
+    color: red;
+  }
+
+  .selectedIcon {
+    vertical-align: middle;
+    color:chartreuse;
+  }
+  
+  .message {
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: smaller;
+  }
+  
