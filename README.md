@@ -1,5 +1,32 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+
+To run the project:
+- Clone the repository "biofourmis-login"
+- run "npm install"
+- run "npm start" or "yarn start"
+
+
+## General rules
+
+#### Casing
+
+Folders in lower case are considered part of the structure.
+
+### UI files
+
+This project UI files are structed based on features rather than types. Each category has a folder under `src`
+
+- components
+  - Anything that uses at least a few elements. Such as a header or card.
+- pages
+  - Final Screens of the project
+- routes
+  - Private and public routes
+- Images
+  - Media/images used in that component.
+
 ## Available Scripts
 
 In the project directory, you can run:
