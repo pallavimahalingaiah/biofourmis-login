@@ -157,7 +157,12 @@ class ForgotPasswordForm extends Component {
                       ) : null}
                     </Form.Group>
 
-                    <Form.Group as={Col} md="12" controlId="formBasicPassword">
+                    <Form.Group
+                      as={Col}
+                      md="12"
+                      controlId="formBasicPassword"
+                      style={{ margin: "1.5rem 0" }}
+                    >
                       <Form.Label>Confirm new password</Form.Label>
                       <InputGroup>
                         <Form.Control

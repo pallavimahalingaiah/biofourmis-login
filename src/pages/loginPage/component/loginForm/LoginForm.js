@@ -72,7 +72,10 @@ class LoginForm extends Component {
                     ) : null}
                   </Form.Group>
 
-                  <Form.Group controlId="formBasicPassword">
+                  <Form.Group
+                    controlId="formBasicPassword"
+                    style={{ margin: "1.5rem 0" }}
+                  >
                     <Form.Label>Password</Form.Label>
                     <InputGroup>
                       <Form.Control
@@ -87,7 +90,7 @@ class LoginForm extends Component {
                         }
                         style={{ borderRight: "none" }}
                       />
-                      <InputGroup.Append>
+                      <InputGroup.Append className="login-form-input-field-style">
                         {!this.state.passwordHidden ? (
                           <Button
                             variant="outline-secondary"

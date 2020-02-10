@@ -97,7 +97,7 @@
   .error-message {
     color: #ff6565;
     padding: 0.5em 0.2em;
-    height: 1em;
+    height: 2rem;
     position: absolute;
     font-size: 0.8em;
   }
@@ -122,6 +122,10 @@
 
 .loginpage-input {
     background-color: ghostwhite !important;
+}
+
+.login-form-input-field-style {
+    background-color: aliceblue;
 }
 
 
