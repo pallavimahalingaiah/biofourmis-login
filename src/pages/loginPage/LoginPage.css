@@ -1,3 +1,36 @@
+@media (max-width: 576px)  {
+    .modal-width{
+        width: 50% !important;
+        margin:1.75rem auto !important;
+    }
+ }
+ 
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .modal-width{
+        width: 50% !important;
+    }
+ }
+
+ @media (min-width: 768px) and (max-width: 991.98px) {
+    .modal-width{
+        width: 40% !important;
+    }
+ }
+
+ @media (min-width: 992px) and (max-width: 1199.98px) { 
+.modal-width{
+        width: 30% !important;
+    }
+  }
+
+  @media (min-width: 1200px) { 
+    .modal-width{
+        width: 28% !important;
+        top: 10%
+    }
+   }
+
+
 .layout-image {
     background-image: url(./images/landing-page.png);
     height: 100vh;
