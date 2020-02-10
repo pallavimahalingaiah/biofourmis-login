@@ -10,10 +10,10 @@ import "./FormErrorValidation.css";
 import { Container, Row, Col } from "react-bootstrap";
 
 let errorList = [
-  "should be minimum 8 chars",
-  "atleast one uppercase letter[A-Z]",
-  "atleast one lowercase letter[a-z]",
-  "atleast one numeric character[0-9]"
+  "password should be min 8 characters",
+  "at least 1 uppercase letter[A-Z]",
+  "at least 1 lowercase letter[a-z]",
+  "at least 1 numeric character[0-9]"
 ];
 
 const FormErrorValidation = props => {

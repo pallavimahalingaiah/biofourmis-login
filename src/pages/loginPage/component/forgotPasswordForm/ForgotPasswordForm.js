@@ -161,7 +161,7 @@ class ForgotPasswordForm extends Component {
                       as={Col}
                       md="12"
                       controlId="formBasicPassword"
-                      style={{ margin: "1.5rem 0" }}
+                      style={{ marginTop: "1.5rem " }}
                     >
                       <Form.Label>Confirm new password</Form.Label>
                       <InputGroup>
@@ -229,6 +229,7 @@ class ForgotPasswordForm extends Component {
                         <Alert className="forgot-password-validation-success-alert">
                           password matched
                           <FontAwesomeIcon
+                            style={{ marginLeft: ".3rem" }}
                             icon={faCheckCircle}
                           ></FontAwesomeIcon>
                         </Alert>
